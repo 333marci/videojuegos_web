@@ -43,7 +43,19 @@ INSERT INTO videojuegos (id, titulo, desarrollador, genero, anio_lanzamiento, ca
 (13, 'Final Fantasy VII Rebirth', 'Square Enix', 'RPG', 2024, 9.5, 'El viaje m├ís all├í de Midgar.', 79.99, 0, 'https://imgs.search.brave.com/mxJ6Skw5f2N4gmyZDjGetPmJUwAh3nQsPv4Dgc8Ypwk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9hc3Nl/dHNpby5nbndjZG4u/Y29tL2NvNzNqdV9q/N0VDUHdPLmpwZz93/aWR0aD0yMDQ4Jmhl/aWdodD0yMDQ4JmZp/dD1ib3VuZHMmcXVh/bGl0eT04NSZmb3Jt/YXQ9anBnJmF1dG89/d2VicA', 'https://www.playstation.com/es-es/games/final-fantasy-vii-rebirth/', 'PS5', 'Unreal Engine 4', '80h-150h', 2400);
 
 CREATE TABLE usuarios (id INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(50) UNIQUE, password_hash VARCHAR(255), nombre_completo VARCHAR(100), email VARCHAR(100) UNIQUE, biografia TEXT, avatar_url VARCHAR(255), es_admin BOOLEAN DEFAULT FALSE, fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP);
-
+INSERT INTO usuarios (id, username, password_hash, nombre_completo, email, biografia, avatar_url, es_admin, fecha_registro) VALUES 
+(1, 'admin', '$2b$10$l1B6Az/zg4U2w1AXr3R/TOcfzifyMwnIQwb0q/heO2qIl5MbwTa4O', 'Administrador Hub', 'admin@gamehub.com', 'Cuenta de administración del sistema.', 'https://api.dicebear.com/7.x/pixel-art/svg?seed=Admin', 1, '2026-03-17 15:38:25'),
+(2, '333marci', '$2b$10$65FXlqpLvVZGHfCAOpLmxuwDqQMF.qeQ9DavpmGKCtyj7jIr/1XuS', 'Marcial Muñoz', 'marcimm2004@gmail.com', '', 'https://api.dicebear.com/7.x/pixel-art/svg?seed=333marci', 0, '2026-03-17 19:25:47'),
+(3, 'pepe', '$2b$10$249hOy0drXdOJWLVA4J9AOFMfec5Pi.JUh41WsalxvXQh.Yqam066', 'pepepepe', 'pepe@pepe.com', '', 'https://api.dicebear.com/7.x/pixel-art/svg?seed=pepe', 0, '2026-03-17 19:46:09');
 
 CREATE TABLE resenas (id INT AUTO_INCREMENT PRIMARY KEY, usuario_id INT, videojuego_id INT, puntuacion INT, comentario TEXT, fecha DATETIME DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE, FOREIGN KEY (videojuego_id) REFERENCES videojuegos(id) ON DELETE CASCADE);
+INSERT INTO resenas (id, usuario_id, videojuego_id, puntuacion, comentario, fecha) VALUES 
+(1, 1, 1, 10, 'Obra maestra absoluta.', '2026-03-17 15:38:25'),
+(2, 1, 3, 8, 'Mucho mejor despu├®s de las actualizaciones.', '2026-03-17 15:38:25'),
+(3, 2, 8, 2, 'mierdon', '2026-03-17 19:26:04'),
+(4, 3, 13, 7, 'Super guay', '2026-03-17 20:36:54');
+
 CREATE TABLE biblioteca (id INT AUTO_INCREMENT PRIMARY KEY, usuario_id INT, videojuego_id INT, fecha_agregado DATETIME DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE, FOREIGN KEY (videojuego_id) REFERENCES videojuegos(id) ON DELETE CASCADE);
+INSERT INTO biblioteca (id, usuario_id, videojuego_id, fecha_agregado) VALUES 
+(2, 2, 1, '2026-03-17 19:37:47'),
+(3, 3, 13, '2026-03-17 20:36:02');
