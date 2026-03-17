@@ -43,5 +43,7 @@ INSERT INTO videojuegos (id, titulo, desarrollador, genero, anio_lanzamiento, ca
 (13, 'Final Fantasy VII Rebirth', 'Square Enix', 'RPG', 2024, 9.5, 'El viaje m├ís all├í de Midgar.', 79.99, 0, 'https://imgs.search.brave.com/mxJ6Skw5f2N4gmyZDjGetPmJUwAh3nQsPv4Dgc8Ypwk/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9hc3Nl/dHNpby5nbndjZG4u/Y29tL2NvNzNqdV9q/N0VDUHdPLmpwZz93/aWR0aD0yMDQ4Jmhl/aWdodD0yMDQ4JmZp/dD1ib3VuZHMmcXVh/bGl0eT04NSZmb3Jt/YXQ9anBnJmF1dG89/d2VicA', 'https://www.playstation.com/es-es/games/final-fantasy-vii-rebirth/', 'PS5', 'Unreal Engine 4', '80h-150h', 2400);
 
 CREATE TABLE usuarios (id INT AUTO_INCREMENT PRIMARY KEY, username VARCHAR(50) UNIQUE, password_hash VARCHAR(255), nombre_completo VARCHAR(100), email VARCHAR(100) UNIQUE, biografia TEXT, avatar_url VARCHAR(255), es_admin BOOLEAN DEFAULT FALSE, fecha_registro DATETIME DEFAULT CURRENT_TIMESTAMP);
+
+
 CREATE TABLE resenas (id INT AUTO_INCREMENT PRIMARY KEY, usuario_id INT, videojuego_id INT, puntuacion INT, comentario TEXT, fecha DATETIME DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE, FOREIGN KEY (videojuego_id) REFERENCES videojuegos(id) ON DELETE CASCADE);
 CREATE TABLE biblioteca (id INT AUTO_INCREMENT PRIMARY KEY, usuario_id INT, videojuego_id INT, fecha_agregado DATETIME DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE, FOREIGN KEY (videojuego_id) REFERENCES videojuegos(id) ON DELETE CASCADE);
