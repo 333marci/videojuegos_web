@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Análisis Arquitectónico: Hacia la Excelencia Hexagonal</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@400;700&display=swap" rel="stylesheet">
+    <!-- Mermaid CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+    <style>
+        :root {
+            --bg-color: #0d0e12;
+            --surface-color: #1a1c23;
+            --primary-color: #00f2ff;
+            --secondary-color: #7000ff;
+            --accent-color: #ff007a;
+            --text-color: #e0e0e0;
+            --text-muted: #a0a0a0;
+            --glass: rgba(255, 255, 255, 0.05);
+            --border: rgba(255, 255, 255, 0.1);
+            --shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.8);
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Outfit', sans-serif;
+            color: #fff;
+            margin-bottom: 1.5rem;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Hero Section */
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+            position: relative;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            background: linear-gradient(90deg, var(--primary-color), var(--secondary-color));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+        }
+
+        header p {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Content Blocks */
+        section {
+            margin-bottom: 5rem;
+            background: var(--glass);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--border);
+            border-radius: 24px;
+            padding: 3rem;
+            box-shadow: var(--shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 48px 0 rgba(0, 242, 255, 0.1);
+        }
+
+        .highlight {
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+
+        ul {
+            list-style: none;
+            margin: 1.5rem 0;
+        }
+
+        ul li {
+            margin-bottom: 1rem;
+            padding-left: 1.5rem;
+            position: relative;
+        }
+
+        ul li::before {
+            content: '▹';
+            position: absolute;
+            left: 0;
+            color: var(--accent-color);
+        }
+
+        /* Mermaid Styles */
+        .mermaid-container {
+            background: #ffffff05;
+            border-radius: 16px;
+            padding: 2rem;
+            margin-top: 2rem;
+            overflow-x: auto;
+            border: 1px dashed var(--border);
+        }
+
+        /* Grid for benefits */
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .benefit-card {
+            background: rgba(255, 255, 255, 0.03);
+            border-radius: 16px;
+            padding: 1.5rem;
+            border: 1px solid var(--border);
+        }
+
+        .benefit-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.5rem;
+            color: var(--primary-color);
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 2rem;
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            border-top: 1px solid var(--border);
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+        }
+        ::-webkit-scrollbar-track {
+            background: var(--bg-color);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--surface-color);
+            border-radius: 10px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: var(--secondary-color);
+        }
+
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        section {
+            animation: fadeIn 0.8s ease forwards;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <header>
+            <h1>Análisis de Software Senior</h1>
+            <p>Evaluación crítica de arquitectura y propuesta de evolución hacia el patrón de Puertos y Adaptadores.</p>
+        </header>
+
+        <!-- 1. Análisis de Arquitectura Actual -->
+        <section id="analisis">
+            <h2>1. Análisis del Estado Actual</h2>
+            <p>Tras una revisión exhaustiva del código en <code class="highlight">backend/server.js</code> y <code class="highlight">backend/db.js</code>, se concluye que la aplicación <strong>no sigue el patrón de Arquitectura Hexagonal</strong>.</p>
+            <p style="margin-top: 1rem;">Actualmente, el proyecto presenta una estructura <strong>Monolítica Orientada a Rutas</strong>, caracterizada por:</p>
+            <ul>
+                <li><strong>Acoplamiento Directo:</strong> La lógica de negocio está mezclada con el manejo de peticiones HTTP (Express) y el acceso a datos (MySQL/Pool).</li>
+                <li><strong>Responsabilidades Mezcladas:</strong> El archivo <code class="highlight">server.js</code> actúa como controlador, servicio y repositorio simultáneamente.</li>
+                <li><strong>Dificultad de Testing:</strong> Al no existir abstracciones (interfaces o puertos), el testing unitario de la lógica de negocio requiere obligatoriamente mockear el servidor Express y la base de datos MySQL.</li>
+            </ul>
+
+            <div class="mermaid-container">
+                <div class="mermaid">
+                graph TD
+                    A[Frontend - HTML/JS] -->|HTTP REST| B[Express App - server.js]
+                    subgraph "Backend (server.js)"
+                        B --> C[Auth Logic]
+                        B --> D[Game Logic]
+                        B --> E[User Profile Logic]
+                        C --> F[mysql2 / db.js]
+                        D --> F
+                        E --> F
+                    end
+                    F -->|SQL Queries| G[(Base de Datos MySQL)]
+                    
+                    style B fill:#1a1c23,stroke:#00f2ff,stroke-width:2px;
+                    style F fill:#1a1c23,stroke:#ff007a,stroke-width:2px;
+                </div>
+            </div>
+        </section>
+
+        <!-- 2. Fundamentación Hexagonal -->
+        <section id="fundamentacion">
+            <h2>2. La Propuesta: Arquitectura Hexagonal</h2>
+            <p>La <strong>Arquitectura Hexagonal (o Puertos y Adaptadores)</strong> propone desacoplar la lógica central de la aplicación de los detalles externos (bases de datos, frameworks web, APIs externas).</p>
+            
+            <div class="benefits-grid">
+                <div class="benefit-card">
+                    <h3>Mantenibilidad</h3>
+                    <p>Cambios en la base de datos o en el framework web no afectan la lógica de negocio central. El código es más limpio y fácil de navegar.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Testeabilidad</h3>
+                    <p>Permite probar la lógica de negocio aisladamente usando "Mocks" o "Fakes" sin necesidad de levantar bases de datos reales.</p>
+                </div>
+                <div class="benefit-card">
+                    <h3>Escalabilidad</h3>
+                    <p>Facilita la adición de nuevos adaptadores (ej. una nueva API, una cola de mensajes o una migración a NoSQL) sin tocar el núcleo.</p>
+                </div>
+            </div>
+
+            <p style="margin-top: 2rem;">En este proyecto, esto significaría extraer la validación de usuarios y la gestión de videojuegos a un <span class="highlight">Domain Core</span> puramente agnóstico.</p>
+        </section>
+
+        <!-- 3. Diagrama Propuesto -->
+        <section id="propuesta">
+            <h2>3. Estructura Hexagonal Sugerida</h2>
+            <p>A continuación se visualiza cómo se reorganizaría el código para cumplir con este paradigma de alta calidad:</p>
+
+            <div class="mermaid-container">
+                <div class="mermaid">
+                graph LR
+                    subgraph "Infraestructura (Adaptadores de Entrada)"
+                        API[Express Controller]
+                        CLI[Admin Cli]
+                    end
+
+                    subgraph "Dominio (Puertos)"
+                        AuthPort[IAuthService]
+                        GamePort[IGameRepository]
+                    end
+
+                    subgraph "Núcleo de Aplicación"
+                        Core[Lógica de Negocio / Casos de Uso]
+                    end
+
+                    subgraph "Infraestructura (Adaptadores de Salida)"
+                        MySQL[MySQL Implementation]
+                        ExtAPI[External Game API]
+                    end
+
+                    API --> AuthPort
+                    CLI --> AuthPort
+                    AuthPort --> Core
+                    GamePort --> Core
+                    Core --> MySQL
+                    Core --> ExtAPI
+
+                    style Core fill:#7000ff33,stroke:#7000ff,stroke-width:4px;
+                    style API fill:#1a1c23,stroke:#00f2ff;
+                    style MySQL fill:#1a1c23,stroke:#ff007a;
+                </div>
+            </div>
+        </section>
+
+        <!-- 4. Conclusión -->
+        <section id="conclusion">
+            <h2>4. Hoja de Ruta</h2>
+            <p>Para implementar esta evolución, recomendaría un refactor incremental:</p>
+            <ul>
+                <li><span class="highlight">Fase 1:</span> Extraer las consultas SQL de <code class="highlight">server.js</code> a una capa de <code class="highlight">Repositories</code>.</li>
+                <li><span class="highlight">Fase 2:</span> Separar las funciones de validación y cálculo a objetos de <code class="highlight">Domain Services</code>.</li>
+                <li><span class="highlight">Fase 3:</span> Inyectar las dependencias en los controladores de Express.</li>
+            </ul>
+        </section>
+
+        <footer>
+            Documento de Análisis Arquitectónico &copy; 2026 - Senior Software Architect Perspective
+        </footer>
+    </div>
+
+    <script>
+        // Inicializar Mermaid con tema oscuro personalizado
+        mermaid.initialize({
+            startOnLoad: true,
+            theme: 'dark',
+            securityLevel: 'loose',
+            themeVariables: {
+                primaryColor: '#1a1c23',
+                primaryTextColor: '#fff',
+                primaryBorderColor: '#00f2ff',
+                lineColor: '#7000ff',
+                secondaryColor: '#1a1c23',
+                tertiaryColor: '#1a1c23'
+            }
+        });
+    </script>
+</body>
+</html>
