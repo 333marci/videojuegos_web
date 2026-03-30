@@ -53,9 +53,12 @@ INSERT INTO resenas (id, usuario_id, videojuego_id, puntuacion, comentario, fech
 (1, 1, 1, 10, 'Obra maestra absoluta.', '2026-03-17 15:38:25'),
 (2, 1, 3, 8, 'Mucho mejor despu├®s de las actualizaciones.', '2026-03-17 15:38:25'),
 (3, 2, 8, 2, 'mierdon', '2026-03-17 19:26:04'),
-(4, 3, 13, 7, 'Super guay', '2026-03-17 20:36:54');
+(4, 3, 13, 7, 'Super guay', '2026-03-17 20:36:54'),
+(5, 2, 6, 6, 'Guay pero no me convence', '2026-03-18 00:35:20'),
+(6, 1, 4, 1, 'mierdon historico', '2026-03-18 00:39:06');
 
 CREATE TABLE biblioteca (id INT AUTO_INCREMENT PRIMARY KEY, usuario_id INT, videojuego_id INT, fecha_agregado DATETIME DEFAULT CURRENT_TIMESTAMP, FOREIGN KEY (usuario_id) REFERENCES usuarios(id) ON DELETE CASCADE, FOREIGN KEY (videojuego_id) REFERENCES videojuegos(id) ON DELETE CASCADE);
 INSERT INTO biblioteca (id, usuario_id, videojuego_id, fecha_agregado) VALUES 
 (2, 2, 1, '2026-03-17 19:37:47'),
-(3, 3, 13, '2026-03-17 20:36:02');
+(3, 3, 13, '2026-03-17 20:36:02'),
+(4, 2, 6, '2026-03-18 00:34:41');

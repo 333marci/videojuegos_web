@@ -37,8 +37,9 @@ Sistema robusto para administradores que permite:
 | Capa | Tecnologías |
 | :--- | :--- |
 | **Frontend** | HTML5, CSS3 (Vanilla), JavaScript Moderno (ES6+) |
-| **Backend** | Node.js, Express |
+| **Backend** | Node.js, Express (Arquitectura Hexagonal & SOLID) |
 | **Base de Datos** | MySQL |
+| **Testing** | Jest, Supertest |
 | **Seguridad** | JSON Web Tokens (JWT), BcryptJS |
 
 ---
@@ -73,10 +74,25 @@ JWT_SECRET=tu_clave_secreta
 Importa el archivo `database.sql` en tu servidor MySQL para inicializar las tablas y los datos de prueba.
 
 ### 5. Ejecución
+El servidor sirve directamente el frontend desde la carpeta `/frontend`. Iniciarlo es tan fácil como:
+
 ```bash
-node server.js
+# Modo desarrollo (con auto-reload):
+npm run dev
+
+# Modo producción:
+npm start
 ```
-El servidor estará disponible en `http://localhost:8000`.
+El proyecto completo (Frontend y API) estará disponible en `http://localhost:8000`.
+
+### 6. Testing (Pruebas Unitarias)
+El backend está diseñado bajo la **Arquitectura Hexagonal** (Ports & Adapters) y principios **SOLID**, lo que permite un testeo riguroso de la lógica de negocio aislando por completo la base de datos MySQL (por inyección de dependencias).
+
+Para correr los tests unitarios:
+```bash
+npm test
+```
+*Esto ejecutará la suite de Jest asegurando que los casos de uso funcionan perfectamente.*
 
 ---
 
