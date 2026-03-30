@@ -101,6 +101,7 @@ npm test
 Este proyecto utiliza un flujo de trabajo basado en ramas para asegurar la estabilidad:
 *   `main`: Rama de producción. Contiene el código estable y verificado.
 *   `dev`: Rama de desarrollo. Aquí es donde se prueban las nuevas características antes de integrarlas.
+*   `refactor-hexagonal`: Rama de refactorización hexagonal. Contiene el código con arquitectura hexagonal, SOLID y tests unitarios.
 
 ---
 
