@@ -1,71 +1,108 @@
-# GameHub - Gestión de Videojuegos 🎮
+# 🎮 GameHub - Plataforma de Videojuegos Premium
 
-Proyecto web integral para la gestión, reseña y organización de colecciones de videojuegos. Desarrollado con una arquitectura moderna que combina un backend robusto en Node.js y un frontend dinámico basado en Bootstrap.
+![Banner de GameHub](assets/banner.png)
 
-## 🚀 Características Principales
+GameHub es una plataforma web moderna y sofisticada diseñada para entusiastas de los videojuegos. Con una estética **Cyberpunk** y una experiencia de usuario fluida, permite explorar, buscar y gestionar tu propia colección de juegos de manera intuitiva.
 
-- **Gestión Completa (CRUD)**: Añade, edita y elimina videojuegos (exclusivo para administradores).
-- **Sistema de Usuarios**: Registro, inicio de sesión y perfiles personalizados con avatars dinámicos.
-- **Biblioteca Personal**: Guarda los juegos que has jugado y mantén un registro de tu colección.
-- **Reseñas y Calificaciones**: Comparte tu opinión con la comunidad y califica tus juegos favoritos.
-- **Búsqueda Avanzada**: Filtros por género, plataforma, año y puntuación mínima.
-- **Estadísticas en Tiempo Real**: Visualización global de la colección.
-- **Comparador de Juegos**: Compara especificaciones y precios entre dos juegos.
+## ✨ Características Principales
 
-## 🛠️ Tecnologías Utilizadas
+### 🔍 Búsqueda Avanzada y Dinámica
+Encuentra exactamente lo que buscas con nuestro sistema de filtros inteligentes.
+*   **Filtros multicapa:** Filtra por género, plataforma, año de lanzamiento y precio.
+*   **Sugerencias en tiempo real:** Resultados dinámicos mientras escribes.
+*   **Ordenamiento inteligente:** Por popularidad, fecha de lanzamiento o puntuación.
 
-- **Frontend**: HTML5, CSS3 (Vanilla), Bootstrap 5, Font Awesome.
-- **Backend**: Node.js, Express.
-- **Base de Datos**: MySQL (utilizando `mysql2/promise`).
-- **Autenticación**: JSON Web Tokens (JWT) y bcryptjs para hashing de contraseñas.
+![Búsqueda de GameHub](assets/search_mockup.png)
 
-## 📋 Requisitos Previos
+### 👤 Autenticación y Perfiles Personalizados
+Sistema completo de gestión de usuarios con estética premium.
+*   **Registro seguro:** Encriptación de contraseñas con Bcrypt.
+*   **Tokens JWT:** Sesiones seguras y persistentes.
+*   **Avatar dinámico:** Integración con DiceBear para avatares únicos.
 
-- [Node.js](https://nodejs.org/) (v14 o superior)
-- [MySQL Server](https://www.mysql.com/) (v8.0 sugerido)
+![Autenticación GameHub](assets/auth_mockup.png)
 
-## ⚙️ Instalación y Configuración
+### 📚 Biblioteca Personal (My Library)
+Crea tu propia colección digital. Añade juegos a tu lista de "jugados", califícalos y deja reseñas personalizadas para compartirlas con otros usuarios.
 
-1. **Clonar el repositorio**:
-   ```bash
-   git clone <url-del-repositorio>
-   cd videojuegos_web
-   ```
-
-2. **Configurar la Base de Datos**:
-   - Crea una base de datos llamada `videojuegos_db`.
-   - Importa el archivo `database.sql` ubicado en la raíz del proyecto para crear las tablas e insertar los datos iniciales.
-
-3. **Configurar el Backend**:
-   - Navega a la carpeta backend: `cd backend`
-   - Instala las dependencias: `npm install`
-   - Configura las variables de entorno en el archivo `.env`:
-     ```env
-     PORT=8000
-     DB_HOST=localhost
-     DB_USER=tu_usuario
-     DB_PASSWORD=tu_password
-     DB_NAME=videojuegos_db
-     DB_PORT=3306
-     JWT_SECRET=tu_secreto_seguro
-     ```
-
-4. **Ejecutar la Aplicación**:
-   - Inicia el servidor: `npm start` o `node server.js`
-   - Abre `frontend/index.html` en tu navegador (o usa una extensión como Live Server).
-
-## 🛡️ Acceso de Administrador
-
-Para probar las funciones de gestión, puedes usar la cuenta de administrador predeterminada:
-- **Usuario**: `admin`
-- **Contraseña**: `123456`
-
-## 📁 Estructura del Proyecto
-
-- `/backend`: Servidor API y lógica de negocio.
-- `/frontend`: Interfaz de usuario y scripts del cliente.
-- `/docs`: Documentación detallada y diagramas de arquitectura.
-- `database.sql`: Esquema unificado para MySQL.
+### 🛡️ Panel de Administración y Backups
+Sistema robusto para administradores que permite:
+*   Gestión total del catálogo de juegos.
+*   **Exportación SQL automática:** Sincronización del estado de la base de datos a un archivo físico en tiempo real para máxima seguridad de los datos.
 
 ---
-© 2024 GameHub - Desarrollado para amantes de los videojuegos.
+
+## 🚀 Tecnologías Utilizadas
+
+| Capa | Tecnologías |
+| :--- | :--- |
+| **Frontend** | HTML5, CSS3 (Vanilla), JavaScript Moderno (ES6+) |
+| **Backend** | Node.js, Express (Arquitectura Hexagonal & SOLID) |
+| **Base de Datos** | MySQL |
+| **Testing** | Jest, Supertest |
+| **Seguridad** | JSON Web Tokens (JWT), BcryptJS |
+
+---
+
+## 🛠️ Instalación y Configuración
+
+Sigue estos pasos para poner en marcha el proyecto localmente:
+
+### 1. Requisitos Previos
+*   Node.js instalado.
+*   Servidor MySQL corriendo.
+
+### 2. Clonar y Configurar
+```bash
+git clone https://github.com/333marci/videojuegos_web.git
+cd videojuegos_web/backend
+npm install
+```
+
+### 3. Variables de Entorno
+Crea un archivo `.env` en la carpeta `/backend` con los siguientes datos:
+```env
+PORT=8000
+DB_HOST=localhost
+DB_USER=tu_usuario
+DB_PASSWORD=tu_contrasena
+DB_NAME=videojuegos_db
+JWT_SECRET=tu_clave_secreta
+```
+
+### 4. Base de Datos
+Importa el archivo `database.sql` en tu servidor MySQL para inicializar las tablas y los datos de prueba.
+
+### 5. Ejecución
+El servidor sirve directamente el frontend desde la carpeta `/frontend`. Iniciarlo es tan fácil como:
+
+```bash
+# Modo desarrollo (con auto-reload):
+npm run dev
+
+# Modo producción:
+npm start
+```
+El proyecto completo (Frontend y API) estará disponible en `http://localhost:8000`.
+
+### 6. Testing (Pruebas Unitarias)
+El backend está diseñado bajo la **Arquitectura Hexagonal** (Ports & Adapters) y principios **SOLID**, lo que permite un testeo riguroso de la lógica de negocio aislando por completo la base de datos MySQL (por inyección de dependencias).
+
+Para correr los tests unitarios:
+```bash
+npm test
+```
+*Esto ejecutará la suite de Jest asegurando que los casos de uso funcionan perfectamente.*
+
+---
+
+## 🌿 Gestión de Versiones
+
+Este proyecto utiliza un flujo de trabajo basado en ramas para asegurar la estabilidad:
+*   `main`: Rama de producción. Contiene el código estable y verificado.
+*   `dev`: Rama de desarrollo. Aquí es donde se prueban las nuevas características antes de integrarlas.
+*   `refactor-hexagonal`: Rama de refactorización hexagonal. Contiene el código con arquitectura hexagonal, SOLID y tests unitarios.
+
+---
+
+Desarrollado con ❤️ para la comunidad gamer.
